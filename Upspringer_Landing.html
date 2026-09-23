@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upspringer Ltd — Practical software. Practical AI.</title>
+<meta name="description" content="Upspringer Ltd builds practical software and teaches teams to use AI well — through products, training cohorts, and custom builds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#12182A;
+    --ink-2:#1B233A;
+    --ink-3:#242E4A;
+    --green:#2FAE66;
+    --green-deep:#248F53;
+    --green-soft:rgba(47,174,102,0.16);
+    --sand:#E8B85C;
+    --sand-deep:#CC9B3E;
+    --paper:#F5F6F2;
+    --paper-2:#ECEEE6;
+    --text:#1B2130;
+    --muted:#5B6270;
+    --line:#DDE0D6;
+    --white:#FFFFFF;
+    --mx:50%; --my:50%;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:80px;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  button{font-family:'Inter',sans-serif;cursor:pointer;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .narrow{max-width:680px;}
+
+  /* ---------- Reveal on scroll (progressive enhancement — visible by default) ---------- */
+  .reveal{opacity:1;transform:none;}
+  html.js-reveal .reveal{
+    opacity:0;transform:translateY(22px);
+    transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  html.js-reveal .reveal.in-view{opacity:1;transform:translateY(0);}
+  .reveal-1.in-view{transition-delay:.08s;}
+  .reveal-2.in-view{transition-delay:.16s;}
+  .reveal-3.in-view{transition-delay:.24s;}
+  @media (prefers-reduced-motion: reduce){
+    html.js-reveal .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* ---------- Header ---------- */
+  header.top{
+    background:rgba(18,24,42,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  header.top .bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1160px;margin:0 auto;
+  }
+  .brand{
+    font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--white);
+    display:flex;align-items:baseline;gap:2px;text-decoration:none;
+  }
+  .brand .spring{
+    background:linear-gradient(100deg, var(--green) 0%, var(--sand) 50%, var(--green) 100%);
+    background-size:220% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 7s linear infinite;
+  }
+  @keyframes shine{ to{ background-position:-220% center; } }
+  @media (prefers-reduced-motion: reduce){ .brand .spring{animation:none;color:var(--green);} }
+
+  header.top nav{display:flex;gap:28px;align-items:center;}
+  header.top nav a.navlink{
+    color:#B7BCC9;font-size:14.5px;text-decoration:none;font-weight:500;
+    margin-right:28px;position:relative;padding-bottom:3px;
+  }
+  header.top nav a.navlink::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--green);
+    transition:width .25s ease;
+  }
+  header.top nav a.navlink:hover{color:var(--white);}
+  header.top nav a.navlink:hover::after{width:100%;}
+  header.top nav a.navlink:last-of-type{margin-right:0;}
+  @media (max-width:560px){
+    header.top nav a.navlink{display:none;}
+    header.top .bar{padding:14px 18px;}
+    .brand{font-size:18px;}
+  }
+
+  .btn{
+    display:inline-block;border:none;border-radius:3px;
+    padding:11px 20px;font-size:14.5px;font-weight:600;
+    font-family:'Inter',sans-serif;letter-spacing:0.01em;
+    transition:transform .18s cubic-bezier(.2,.8,.3,1), background .18s ease, box-shadow .18s ease;
+    text-decoration:none;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0px);}
+  .btn-green{background:var(--green);color:var(--ink);}
+  .btn-green:hover{background:var(--green-deep);color:var(--white);box-shadow:0 10px 24px -10px rgba(47,174,102,0.55);}
+  .btn-outline{background:transparent;border:1.5px solid rgba(18,24,42,0.28);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--green);color:var(--green-deep);background:rgba(47,174,102,0.06);}
+  .btn-dark{background:var(--ink);color:var(--white);}
+  .btn-dark:hover{background:var(--ink-3);box-shadow:0 10px 24px -10px rgba(18,24,42,0.5);}
+  .btn-sand{background:var(--sand);color:var(--ink);}
+  .btn-sand:hover{background:var(--sand-deep);box-shadow:0 10px 24px -10px rgba(232,184,92,0.55);}
+  .btn-full{width:100%;text-align:center;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 0 60px;}
+  .hero-grid{display:grid;grid-template-columns:1fr 0.85fr;gap:44px;align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero .kicker{
+    font-size:13.5px;color:var(--green-deep);font-weight:600;letter-spacing:0.06em;
+    text-transform:uppercase;margin-bottom:14px;
+  }
+  .hero h1{font-size:48px;line-height:1.1;margin-bottom:18px;}
+  @media (max-width:640px){ .hero h1{font-size:33px;} }
+  .hero p.lede{font-size:17.5px;line-height:1.6;color:var(--muted);max-width:50ch;margin-bottom:28px;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+
+  /* ---------- Hero rising-sparks visual ---------- */
+  .rise-panel{
+    background:var(--ink);border-radius:12px;height:400px;position:relative;overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .rise-panel .glabel{
+    position:absolute;top:22px;left:24px;z-index:3;
+    font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0.08em;color:#7A8296;
+    text-transform:uppercase;
+  }
+  .rise-field{position:absolute;inset:0;}
+  .spark{
+    position:absolute;bottom:-20px;border-radius:50%;
+    background:radial-gradient(circle, var(--green) 0%, rgba(47,174,102,0) 70%);
+    opacity:0;animation:rise linear infinite;
+  }
+  .spark.sand{background:radial-gradient(circle, var(--sand) 0%, rgba(232,184,92,0) 70%);}
+  @keyframes rise{
+    0%{transform:translateY(0) scale(0.6); opacity:0;}
+    12%{opacity:.9;}
+    85%{opacity:.5;}
+    100%{transform:translateY(-380px) scale(1.15); opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){ .spark{animation:none;opacity:.35;bottom:40%;} }
+  .rise-panel .baseline{
+    position:absolute;bottom:0;left:0;right:0;height:80px;
+    background:linear-gradient(to top, rgba(18,24,42,1), rgba(18,24,42,0));
+    z-index:2;
+  }
+  .rise-panel .quote{
+    position:absolute;bottom:22px;left:24px;right:24px;z-index:3;
+    font-family:'Fraunces',serif;font-size:15px;color:#C9CDD8;line-height:1.5;font-style:italic;
+  }
+
+  section{padding:56px 0;}
+  .section-head{margin-bottom:32px;max-width:60ch;}
+  .section-head .kicker{
+    font-size:13px;color:var(--green-deep);font-weight:600;letter-spacing:0.06em;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .section-head h2{font-size:31px;margin-bottom:10px;}
+  .section-head p{color:var(--muted);font-size:16px;line-height:1.6;}
+
+  /* ---------- Product shelf ---------- */
+  .shelf{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;}
+  @media (max-width:800px){ .shelf{grid-template-columns:1fr;} }
+
+  .product-card{
+    background:
+      radial-gradient(500px circle at var(--mx) var(--my), rgba(47,174,102,0.22), transparent 45%),
+      var(--ink);
+    color:var(--white);border-radius:10px;
+    padding:30px 28px;position:relative;overflow:hidden;
+    transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s ease;
+  }
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -18px rgba(18,24,42,0.5);}
+  .status-pill{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--green-soft);color:var(--green);
+    font-size:12px;font-weight:700;letter-spacing:0.03em;
+    padding:4px 10px;border-radius:20px;margin-bottom:16px;
+  }
+  .status-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  @media (prefers-reduced-motion: reduce){ .status-pill .dot{animation:none;} }
+  .product-card h3{color:var(--white);font-size:24px;margin-bottom:10px;position:relative;}
+  .product-card p.desc{color:#B7BCC9;font-size:15px;line-height:1.6;margin-bottom:18px;max-width:44ch;position:relative;}
+  .product-feats{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:7px;position:relative;}
+  .product-feats li{color:#C9CDD8;font-size:13.5px;padding-left:18px;position:relative;}
+  .product-feats li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--sand);border-radius:1px;transform:rotate(45deg);}
+
+  .ghost-card{
+    border:1.5px dashed #C7CBC0;border-radius:10px;padding:28px;
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    min-height:220px;background:var(--paper-2);
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .ghost-card:hover{border-color:var(--green);background:var(--white);}
+  .ghost-card .tag{font-size:12px;font-weight:700;letter-spacing:0.05em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+  .ghost-card h3{font-size:19px;color:var(--muted);margin-bottom:8px;}
+  .ghost-card p{font-size:14px;color:#8B9088;line-height:1.55;}
+
+  /* ---------- What we do — pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:860px){ .pillars{grid-template-columns:1fr;} }
+  .pillar{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;padding:26px 24px;
+    position:relative;overflow:hidden;
+    transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease;
+  }
+  .pillar::before{
+    content:"";position:absolute;top:0;left:0;height:3px;width:0;
+    background:linear-gradient(90deg, var(--green), var(--sand));
+    transition:width .35s cubic-bezier(.2,.8,.3,1);
+  }
+  .pillar:hover{transform:translateY(-5px);box-shadow:0 18px 36px -18px rgba(18,24,42,0.28);}
+  .pillar:hover::before{width:100%;}
+  .pillar .pnum{
+    font-family:'Fraunces',serif;font-size:13px;color:var(--sand-deep);font-weight:600;
+    letter-spacing:0.05em;margin-bottom:14px;
+  }
+  .pillar h3{font-size:19px;margin-bottom:10px;}
+  .pillar p{font-size:14.5px;color:var(--muted);line-height:1.6;margin:0;}
+
+  /* ---------- Paid training cohorts ---------- */
+  .cohort-wrap{
+    background:linear-gradient(155deg, var(--ink) 0%, #1A2340 100%);
+    border-radius:14px;padding:46px 42px;color:var(--white);position:relative;overflow:hidden;
+  }
+  @media (max-width:700px){ .cohort-wrap{padding:32px 24px;} }
+  .cohort-wrap::before{
+    content:"";position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle, rgba(232,184,92,0.14), transparent 70%);
+  }
+  .cohort-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:30px;position:relative;}
+  .cohort-badge{
+    display:inline-flex;align-items:center;gap:6px;background:rgba(232,184,92,0.16);color:var(--sand);
+    font-size:12px;font-weight:700;letter-spacing:0.04em;padding:5px 11px;border-radius:20px;margin-bottom:14px;
+  }
+  .cohort-top h2{color:var(--white);font-size:29px;max-width:20ch;margin-bottom:10px;}
+  .cohort-top p{color:#B7BCC9;font-size:15.5px;line-height:1.6;max-width:46ch;margin:0;}
+
+  .cohort-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:30px;position:relative;}
+  @media (max-width:700px){ .cohort-steps{grid-template-columns:1fr;} }
+  .cstep{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:18px 18px;}
+  .cstep .cnum{
+    width:26px;height:26px;border-radius:50%;background:var(--sand);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:13px;
+    margin-bottom:12px;
+  }
+  .cstep h4{color:var(--white);font-size:14.5px;font-family:'Inter',sans-serif;font-weight:600;margin-bottom:6px;}
+  .cstep p{color:#A9AFB9;font-size:13px;line-height:1.55;margin:0;}
+
+  .cohort-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:relative;}
+  .cohort-note{color:#8B92A0;font-size:12.5px;}
+
+  /* ---------- Work with us ---------- */
+  .contact-wrap{
+    background:var(--ink);border-radius:14px;padding:44px 40px;color:var(--white);
+    display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+  }
+  @media (max-width:800px){ .contact-wrap{grid-template-columns:1fr;padding:32px 26px;} }
+  .contact-wrap h2{color:var(--white);font-size:28px;margin-bottom:12px;}
+  .contact-wrap p{color:#B7BCC9;font-size:15.5px;line-height:1.6;margin-bottom:0;max-width:44ch;}
+  .contact-list{display:flex;flex-direction:column;gap:12px;}
+  .contact-item{
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:6px;
+    padding:14px 16px;transition:background .2s ease, border-color .2s ease;
+  }
+  .contact-item:hover{background:rgba(255,255,255,0.09);border-color:rgba(47,174,102,0.4);}
+  .contact-item .clabel{font-size:11.5px;color:#8B92A0;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+  .contact-item a{color:var(--white);font-size:15px;font-weight:600;text-decoration:none;}
+  .contact-item a:hover{color:var(--green);}
+
+  footer{background:var(--ink);color:#8B92A0;padding:28px 0;border-top:1px solid rgba(255,255,255,0.08);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12.5px;}
+  footer .brand{font-size:15px;}
+</style>
+</head>
+<body>
+<script>
+  /* Only enable the hidden-then-reveal animation if the browser actually
+     supports IntersectionObserver and the person hasn't asked for reduced
+     motion. Otherwise every section stays plainly visible — content must
+     never depend on JS to be seen. */
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.documentElement.classList.add('js-reveal');
+  }
+</script>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="#top">Up<span class="spring">springer</span></a>
+    <nav>
+      <a class="navlink" href="#products">Products</a>
+      <a class="navlink" href="#training">Training</a>
+      <a class="btn btn-green" href="#work-with-us">Work with us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal in-view">
+        <div class="kicker">Upspringer Ltd · Registered MSME, Nigeria</div>
+        <h1>Practical software.<br>Practical AI.</h1>
+        <p class="lede">We build tools that solve real problems, and we teach the people who'll use them well — through shipped products, live training cohorts, and custom builds for teams ready to move.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-green" href="#products">See what we've built</a>
+          <a class="btn btn-outline" href="#work-with-us">Work with us</a>
+        </div>
+      </div>
+
+      <div class="rise-panel reveal reveal-2 in-view">
+        <div class="glabel">Upspringer</div>
+        <div class="rise-field" id="riseField"></div>
+        <div class="baseline"></div>
+        <div class="quote">"Upspringer" — to rise, to spring up. Everything we build starts small and is meant to grow.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="kicker">What we've shipped</div>
+        <h2>Products, not slideware</h2>
+        <p>Every product here is real, working software — not a mockup. This shelf grows as we ship.</p>
+      </div>
+      <div class="shelf">
+        <div class="product-card reveal reveal-1" id="productCard">
+          <div class="status-pill"><span class="dot"></span>LIVE</div>
+          <h3>HB AutoTrail</h3>
+          <p class="desc">Car maintenance tracking for Nigerian owners, workshops, and fleets — every service, every mechanic, every cost, in one place. Built to fix Nigeria's bad car-record culture, one logbook at a time.</p>
+          <ul class="product-feats">
+            <li>Full service history, logged per vehicle</li>
+            <li>OBD warning-light code lookup</li>
+            <li>AI assistant for diagnosing symptoms</li>
+          </ul>
+          <!-- Confirmed live: github.com/Holybone/Hb-autoTrail -->
+          <a class="btn btn-sand" href="https://holybone.github.io/Hb-autoTrail/" target="_blank" rel="noopener">Open HB AutoTrail</a>
+        </div>
+
+        <div class="ghost-card reveal reveal-2">
+          <div class="tag">Next up</div>
+          <h3>Another product is being built</h3>
+          <p>We ship one thing well before starting the next. Check back — or ask us what we're working on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="what-we-do">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="kicker">How we work</div>
+        <h2>Three ways we help</h2>
+        <p>Software when you need a tool. Training when your team needs the skill. Custom builds when nothing off-the-shelf fits.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal reveal-1">
+          <div class="pnum">01</div>
+          <h3>Software Products</h3>
+          <p>We build and ship real, working tools for problems we see clearly — like HB AutoTrail. Each one is used before it's sold, not the other way round.</p>
+        </div>
+        <div class="pillar reveal reveal-2">
+          <div class="pnum">02</div>
+          <h3>Training &amp; Workshops</h3>
+          <p>Practical AI training for teams and executives — from foundational literacy to building a first working agent. No hype, no jargon, just what actually changes how your team works.</p>
+        </div>
+        <div class="pillar reveal reveal-3">
+          <div class="pnum">03</div>
+          <h3>Consulting &amp; Custom Builds</h3>
+          <p>Have a problem that looks like AutoTrail but isn't? We scope it, build it, and ship it — bespoke software and AI implementation for your specific business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="training">
+    <div class="wrap">
+      <div class="cohort-wrap reveal">
+        <div class="cohort-top">
+          <div>
+            <div class="cohort-badge">★ Small groups, live</div>
+            <h2>Join a live training cohort</h2>
+            <p>Deeper than a free post, faster than a full course — a small, paid WhatsApp cohort, live and practical from day one. Not a recording. Not a crowd.</p>
+          </div>
+        </div>
+        <div class="cohort-steps">
+          <div class="cstep">
+            <div class="cnum">1</div>
+            <h4>Secure your seat</h4>
+            <p>Pay through our secure Paystack checkout — cards, transfer, or USSD.</p>
+          </div>
+          <div class="cstep">
+            <div class="cnum">2</div>
+            <h4>Get your invite</h4>
+            <p>We confirm payment and send your WhatsApp cohort link within 24 hours.</p>
+          </div>
+          <div class="cstep">
+            <div class="cnum">3</div>
+            <h4>Learn live</h4>
+            <p>Daily nuggets, real questions answered, a small group working through it together.</p>
+          </div>
+        </div>
+        <div class="cohort-cta">
+          <!-- Replace href="#" with your real Paystack Payment Link once created (Paystack Dashboard → Payment Links) -->
+          <a class="btn btn-sand" href="#" target="_blank" rel="noopener">Join the next cohort</a>
+          <span class="cohort-note">Seats confirmed manually within 24 hours of payment.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work-with-us">
+    <div class="wrap">
+      <div class="contact-wrap reveal">
+        <div>
+          <h2>Let's talk about what you need</h2>
+          <p>Whether it's a workshop for your team, a custom tool for your business, or a question about one of our products — reach out directly.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="clabel">WhatsApp</div>
+            <!-- Replace 234XXXXXXXXXX with the real number, international format, no + or spaces -->
+            <a href="https://wa.me/234XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20working%20with%20Upspringer%20Ltd" target="_blank" rel="noopener">Chat with us</a>
+          </div>
+          <div class="contact-item">
+            <div class="clabel">Email</div>
+            <a href="mailto:upspringerltd@gmail.com">upspringerltd@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Up<span class="spring" style="color:var(--green);-webkit-text-fill-color:var(--green);">springer</span> Ltd</span>
+    <span>Registered MSME · Nigeria · &copy; <span id="yr"></span></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Scroll reveal (only runs if html.js-reveal is set — see top of body) ---- */
+  if(document.documentElement.classList.contains('js-reveal')){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal:not(.in-view)').forEach(el => io.observe(el));
+  }
+
+  /* ---- Hero rising sparks ---- */
+  const field = document.getElementById('riseField');
+  if(field){
+    const count = reduceMotion ? 8 : 22;
+    for(let i=0;i<count;i++){
+      const s = document.createElement('div');
+      s.className = 'spark' + (Math.random() > 0.6 ? ' sand' : '');
+      const size = 4 + Math.random()*10;
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.left = (Math.random()*94)+'%';
+      s.style.animationDuration = (5 + Math.random()*6)+'s';
+      s.style.animationDelay = (Math.random()*8)+'s';
+      field.appendChild(s);
+    }
+  }
+
+  /* ---- Product card mouse-tracking glow ---- */
+  const card = document.getElementById('productCard');
+  if(card && !reduceMotion){
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100)+'%');
+      card.style.setProperty('--my', ((e.clientY - r.top)/r.height*100)+'%');
+    });
+  }
+</script>
+</body>
+</html>
