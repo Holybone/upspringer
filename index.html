@@ -181,8 +181,9 @@
   .section-head p{color:var(--muted);font-size:16px;line-height:1.6;}
 
   /* ---------- Product shelf ---------- */
-  .shelf{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;}
-  @media (max-width:800px){ .shelf{grid-template-columns:1fr;} }
+  .shelf{display:flex;flex-wrap:wrap;gap:20px;}
+  .shelf > .product-card{flex:1 1 340px;}
+  .shelf > .ghost-card{flex:1 1 260px;}
 
   .product-card{
     background:
@@ -362,7 +363,20 @@
           <a class="btn btn-sand" href="https://holybone.github.io/Hb-autoTrail/" target="_blank" rel="noopener">Open HB AutoTrail</a>
         </div>
 
-        <div class="ghost-card reveal reveal-2">
+        <div class="product-card reveal reveal-2">
+          <div class="status-pill"><span class="dot"></span>LIVE</div>
+          <h3>HB Fabric Studio</h3>
+          <p class="desc">See the look and check the colours before you buy or sew — for everyday users, stylists, designers, tailors, fabric sellers, and aso-ebi coordinators. Works offline, photos stay on your device.</p>
+          <ul class="product-feats">
+            <li>Preview fabric combinations before committing</li>
+            <li>Works fully offline, nothing uploaded</li>
+            <li>Built for four different kinds of users</li>
+          </ul>
+          <!-- Once HB Fabric Studio's own GitHub Pages URL is live, replace href="#" below with the real link -->
+          <a class="btn btn-sand" href="#" target="_blank" rel="noopener">Open HB Fabric Studio</a>
+        </div>
+
+        <div class="ghost-card reveal reveal-3">
           <div class="tag">Next up</div>
           <h3>Another product is being built</h3>
           <p>We ship one thing well before starting the next. Check back — or ask us what we're working on.</p>
@@ -496,14 +510,14 @@
   }
 
   /* ---- Product card mouse-tracking glow ---- */
-  const card = document.getElementById('productCard');
-  if(card && !reduceMotion){
+  document.querySelectorAll('.product-card').forEach(card=>{
+    if(reduceMotion) return;
     card.addEventListener('mousemove', (e)=>{
       const r = card.getBoundingClientRect();
       card.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100)+'%');
       card.style.setProperty('--my', ((e.clientY - r.top)/r.height*100)+'%');
     });
-  }
+  });
 </script>
 </body>
 </html>
